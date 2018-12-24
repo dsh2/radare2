@@ -485,6 +485,8 @@ static int cmd_help(void *data, const char *input) {
 			ut32 s, a;
 			double d;
 			float f;
+			struct tm tm;
+			struct timeval tv;
 			char * const inputs = strdup (input + 1);
 			RList *list = r_num_str_split_list (inputs);
 			const int list_len = r_list_length (list);
@@ -535,6 +537,18 @@ static int cmd_help(void *data, const char *input) {
 				/* ternary */
 				r_num_to_trits (out, n);
 				r_cons_printf ("trits   0t%s\n", out);
+
+				/* date time */
+				if (localtime_r(&n, &tm) && strftime(out, sizeof(out), "%c", &tm)) {
+					r_cons_printf ("atime   %s\n", out);
+				}
+				if (gettimeofday(&tv, NULL) == 0) {
+					tv.tv_sec += n;
+					if (localtime_r(&tv.tv_sec, &tm) && strftime(&out, sizeof(out), "%c", &tm)) {
+						r_cons_printf ("rtime   %s\n", out);
+					}
+				}
+				
 			}
 			free (inputs);
 			r_list_free (list);
