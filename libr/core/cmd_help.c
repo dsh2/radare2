@@ -530,9 +530,9 @@ static int cmd_help(void *data, const char *input) {
 					d = -d;
 				}
 				r_cons_printf ("binary  0b%s\n", out);
-				r_cons_printf ("fvalue: %.1lf\n", core->num->fvalue);
-				r_cons_printf ("float:  %ff\n", f);
-				r_cons_printf ("double: %lf\n", d);
+				r_cons_printf ("fvalue  %.1lf\n", core->num->fvalue);
+				r_cons_printf ("float   %ff\n", f);
+				r_cons_printf ("double  %lf\n", d);
 
 				/* ternary */
 				r_num_to_trits (out, n);
