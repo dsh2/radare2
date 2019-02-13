@@ -243,6 +243,7 @@ R_API char *r_cons_hud(RList *list, const char *prompt) {
 				top_entry_n = 0;
 				i = user_input[0] = 0;
 				break;
+			case 3:	// ^C
 			case 0x1b:	// ESC
 				return NULL;
 			case 8:		// bs
